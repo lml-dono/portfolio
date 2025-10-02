@@ -13,7 +13,8 @@
 
 @include for-screens-below("s") {
   .container {
-    height: 96px; /* requested for < m */
+    top: -80px;
+    /* height: 96px;  requested for < m */
   }
 }
 
