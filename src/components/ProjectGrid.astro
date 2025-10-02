@@ -11,6 +11,8 @@ type ProjectMeta = {
   // Nuevos campos: definidos en cada página de proyecto
   poster?: any; // ImageMetadata de astro:assets
   video?: string; // URL del .webm
+  videoMp4?: string;
+  videoMobile?: string;
   order?: number; // opcional: prioridad de orden (menor número = primero)
   showInHome?: boolean; // opcional: si es false, no aparece en la grid de Home
 };
@@ -60,7 +62,11 @@ const count = projects.length;
                 tabindex="-1"
                 aria-hidden="true"
                 data-thumb-video
-              />
+              >
+                <source src={p.video} type="video/webm" />
+                <source src={p.videoMp4} type="video/mp4" media="(min-width: 768px)" />
+                <source src={p.videoMobile} type="video/mp4" media="(max-width: 767px)" />
+              </video>
             )}
           </div>
           <div class={styles.info}>

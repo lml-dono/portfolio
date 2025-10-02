@@ -12,6 +12,16 @@ import designSys from "../../images/yep-design-system.webp";
 import cards from "../../videos/yep-cards.webm";
 import web from "../../videos/yep-web.webm";
 
+// Compatibility videos
+import thumbMp4 from "../../videos/mp4/yep-video.mp4";
+import screensMp4 from "../../videos/mp4/yep-screens.mp4";
+import cardsMp4 from "../../videos/mp4/yep-cards.mp4";
+import webMp4 from "../../videos/mp4/yep-web.mp4";
+import thumbMobile from "../../videos/mp4/yep-video_720.mp4";
+import screensMobile from "../../videos/mp4/yep-screens_720.mp4";
+import cardsMobile from "../../videos/mp4/yep-cards_720.mp4";
+import webMobile from "../../videos/mp4/yep-web_720.mp4";
+
 // Metadata for Home grid discovery
 export const project = {
   slug: "yepcode",
@@ -22,6 +32,8 @@ export const project = {
   showInHome: true,
   poster,
   video: thumb,
+  videoMp4: thumbMp4,
+  video720: thumbMobile,
 };
 ---
 
@@ -83,7 +95,10 @@ export const project = {
         </div>
       </div>
       <div class={s.center}>
-        <video src={screens} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={screens} type="video/webm" />
+          <source src={screensMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={screensMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
       </div>
@@ -103,10 +118,16 @@ export const project = {
       <div class={s.center}>
         <Image src={tokens} alt="YepCode Design Tokens" loading="lazy" />
         <Image src={designSys} alt="Components of the YepCode Design System" loading="lazy" />
-        <video src={cards} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={cards} type="video/webm" />
+          <source src={cardsMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={cardsMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
-        <video src={web} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={web} type="video/webm" />
+          <source src={webMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={webMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
       </div>

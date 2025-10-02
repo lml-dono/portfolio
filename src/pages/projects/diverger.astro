@@ -14,6 +14,20 @@ import states from "../../videos/diverger-states.webm";
 import spline from "../../images/diverger-spline.webp";
 import mobile from "../../videos/diverger-mobile.webm";
 
+/* Compatibility videos */
+import thumbMp4 from "../../videos/mp4/diverger-video.mp4";
+import introMp4 from "../../videos/mp4/diverger-intro.mp4";
+import faviconMp4 from "../../videos/mp4/diverger-favicon.mp4";
+import sonnerMp4 from "../../videos/mp4/diverger-sonner.mp4";
+import statesMp4 from "../../videos/mp4/diverger-states.mp4";
+import mobileMp4 from "../../videos/mp4/diverger-mobile.mp4";
+import thumbMobile from "../../videos/mp4/diverger-video_720.mp4";
+import introMobile from "../../videos/mp4/diverger-intro_720.mp4";
+import faviconMobile from "../../videos/mp4/diverger-favicon_720.mp4";
+import sonnerMobile from "../../videos/mp4/diverger-sonner_720.mp4";
+import statesMobile from "../../videos/mp4/diverger-states_720.mp4";
+import mobileMobile from "../../videos/mp4/diverger-mobile_720.mp4";
+
 /* Metadata for Home grid discovery */
 export const project = {
   slug: "diverger",
@@ -24,6 +38,8 @@ export const project = {
   showInHome: true,
   poster,
   video: thumb,
+  videoMp4: thumbMp4,
+  video720: thumbMobile,
 };
 ---
 
@@ -74,7 +90,10 @@ export const project = {
     </section>
 
     <section class={s.full}>
-      <video src={intro} autoplay muted loop playsinline preload="auto">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src={intro} type="video/webm" />
+        <source src={introMp4} type="video/mp4" media="(min-width: 768px)" />
+        <source src={introMobile} type="video/mp4" media="(max-width: 767px)" />
         Your browser does not support the video element.
       </video>
     </section>
@@ -91,11 +110,17 @@ export const project = {
         </div>
       </div>
       <div class={s.center}>
-        <video src={favicon} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={favicon} type="video/webm" />
+          <source src={faviconMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={faviconMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
         <Image src={webStatic} alt="Screenshot of Diverger Website" loading="lazy" />
-        <video src={sonner} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={sonner} type="video/webm" />
+          <source src={sonnerMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={sonnerMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
       </div>
@@ -115,9 +140,12 @@ export const project = {
         </div>
       </div>
       <div class={s.center}>
-        <video src={states} autoplay muted loop playsinline preload="auto">
+        <videos autoplay muted loop playsinline preload="auto">
+          <source src={states} type="video/webm" />
+          <source src={statesMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={statesMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
-        </video>
+        </videos>
         <Image src={spline} alt="Diverger Spline Scene" loading="lazy" />
       </div>
     </section>
@@ -135,7 +163,10 @@ export const project = {
         </div>
       </div>
       <div class={s.rightFull}>
-        <video src={mobile} autoplay muted loop playsinline preload="auto">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src={mobile} type="video/webm" />
+          <source src={mobileMp4} type="video/mp4" media="(min-width: 768px)" />
+          <source src={mobileMobile} type="video/mp4" media="(max-width: 767px)" />
           Your browser does not support the video element.
         </video>
       </div>
