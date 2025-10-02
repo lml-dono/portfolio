@@ -1,0 +1,105 @@
+//
+//////////////////////////////////////////
+//  Mediaqueries
+//////////////////////////////////////////
+//
+// -  Variables
+// -  Mixins
+
+//
+// --------------------------------------
+//  Variables
+// --------------------------------------
+//
+
+$breakpoints: (
+  "xs": 1px,
+  "s": 768px,
+  "m": 1024px,
+  "l": 1200px,
+);
+
+//
+// --------------------------------------
+//  Mediaqueries mixins
+// --------------------------------------
+//
+
+//
+//  For screen
+//
+
+@mixin for-screen($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @if $breakpoint == "xs" {
+      @media only screen and (max-width: #{get('s', $breakpoints) - 1px}) {
+        @content;
+      }
+    } @else if $breakpoint == "s" {
+      @media only screen and (min-width: #{get('s', $breakpoints)}) and (max-width: #{get('m', $breakpoints) - 1px}) {
+        @content;
+      }
+    } @else if $breakpoint == "m" {
+      @media only screen and (min-width: #{get('m', $breakpoints)}) and (max-width: #{get('l', $breakpoints) - 1px}) {
+        @content;
+      }
+    } @else if $breakpoint == "l" {
+      @media only screen and (min-width: #{get('l', $breakpoints)}) {
+        @content;
+      }
+    }
+  } @else {
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
+  }
+}
+
+//
+//  For screens above
+//
+
+@mixin for-screens-above($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpointValue: get($breakpoint, $breakpoints);
+    @media (min-width: $breakpointValue) {
+      @content;
+    }
+  } @else {
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
+  }
+}
+
+//
+//  For screens below
+//
+
+@mixin for-screens-below($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpointValue: get($breakpoint, $breakpoints);
+    @media (max-width: ($breakpointValue - 1px)) {
+      @content;
+    }
+  } @else {
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
+  }
+}
+
+//
+//  For screens between
+//
+
+@mixin for-screens-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lowerBreakpoint: get($lower, $breakpoints);
+    $upperBreakpoint: get($upper, $breakpoints);
+    @media (min-width: $lowerBreakpoint) and (max-width: ($upperBreakpoint - 1px)) {
+      @content;
+    }
+  } @else {
+    @if (map-has-key($breakpoints, $lower) == false) {
+      @error 'Your lower breakpoint was invalid: "#{$lower}"';
+    }
+    @if (map-has-key($breakpoints, $upper) == false) {
+      @error 'Your upper breakpoint was invalid: "#{$upper}"';
+    }
+  }
+}

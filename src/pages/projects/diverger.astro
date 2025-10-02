@@ -1,0 +1,146 @@
+---
+import Base from "../../layouts/Base.astro";
+import Button from "../../components/Button.astro";
+import ProjectPager from "../../components/ProjectPager.astro";
+import s from "../../styles/project.module.scss";
+import { Image } from "astro:assets";
+import poster from "../../images/diverger-poster.webp";
+import thumb from "../../videos/diverger-video.webm";
+import intro from "../../videos/diverger-intro.webm";
+import favicon from "../../videos/diverger-favicon.webm";
+import webStatic from "../../images/diverger-web-static.webp";
+import sonner from "../../videos/diverger-sonner.webm";
+import states from "../../videos/diverger-states.webm";
+import spline from "../../images/diverger-spline.webp";
+import mobile from "../../videos/diverger-mobile.webm";
+
+/* Metadata for Home grid discovery */
+export const project = {
+  slug: "diverger",
+  title: "Diverger",
+  skills: ["UI Design", "Motion Design", "Responsive Design", "3D Design"],
+  thumbnail: poster,
+  order: 1,
+  showInHome: true,
+  poster,
+  video: thumb,
+};
+---
+
+<Base title={project.title}>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, noimageindex, nosnippet" />
+    <meta name="googlebot" content="noindex, noimageindex, nosnippet" />
+  </Fragment>
+  <main>
+    <section class={`${s.grid} ${s.first}`}>
+      <header class={`${s.col} ${s.header}`}>
+        <h1 class="label">{project.title}</h1>
+        <p class="body muted">Corporative Website with AI Assistant</p>
+        <Button href="https://diverger.ai/" label="View live site" external={true} />
+      </header>
+      <div class={`${s.col} ${s.intro}`}>
+        <h2 class="muted label">introduction</h2>
+        <p class="body">
+          The goal was to position the brand as a forward-thinking AI company while ensuring
+          usability and adoption. We focused on a conversational experience, using motion and 3D to
+          reinforce the identity while keeping structure and clarity at the forefront.
+        </p>
+      </div>
+      <div class={`${s.col} ${s.right} ${s.smallGrid}`}>
+        <div class={s.col2}>
+          <h2 class="muted label">Responsibilities</h2>
+          <p class="body" set:html={project.skills.join("<br/>")} />
+        </div>
+
+        <div class={s.col}>
+          <h2 class="muted label">Stack</h2>
+          <p class="body">
+            Figma<br />Framer Motion<br />HTML & CSS<br />Spline
+          </p>
+        </div>
+        <div class={s.col}>
+          <h2 class="muted label">Partners</h2>
+          <p class="body">
+            Juan Carlos Alonso<br /><span class="muted">Design Lead</span>
+          </p>
+        </div>
+        <div class={s.col}>
+          <p class="body">
+            Juan Perea<br /><span class="muted">Front-end Developer</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class={s.full}>
+      <video src={intro} autoplay muted loop playsinline preload="auto">
+        Your browser does not support the video element.
+      </video>
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.col}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Plan</h2>
+          <p class="body">
+            We designed an AI-first interface with a prompt system to guide users and encourage
+            exploration. Motion and 3D elements provide feedback and personality while CSS polish
+            ensures performance and responsiveness across devices.
+          </p>
+        </div>
+      </div>
+      <div class={s.center}>
+        <video src={favicon} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+        <Image src={webStatic} alt="Screenshot of Diverger Website" loading="lazy" />
+        <video src={sonner} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.right}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Process</h2>
+          <p class="body">
+            Design exploration started with an AI-first interface. A text input field became the
+            main interaction, supported by a prompt suggestion system that helped users engage
+            without confusion. The 3D sphere, designed in Spline, was animated with multiple states
+            and integrated with Framer Motion to give visual feedback. CSS refinements ensured
+            smooth, responsive performance across devices.
+          </p>
+        </div>
+      </div>
+      <div class={s.center}>
+        <video src={states} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+        <Image src={spline} alt="Diverger Spline Scene" loading="lazy" />
+      </div>
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.col}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Impact</h2>
+          <p class="body">
+            The final result is a responsive, modular site where clean layouts, motion, and 3D
+            interactions work together. It had very positive stakeholder feedback after the first
+            release, and successful adoption of the design patterns across internal pages. The site
+            is now both a corporate hub and a live demonstration of Diverger’s innovative identity.
+          </p>
+        </div>
+      </div>
+      <div class={s.rightFull}>
+        <video src={mobile} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </section>
+
+    <ProjectPager currentSlug={project.slug} />
+  </main>
+</Base>

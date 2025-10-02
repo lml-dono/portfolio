@@ -1,0 +1,138 @@
+---
+import Base from "../../layouts/Base.astro";
+import s from "../../styles/Sections.module.scss";
+import ProjectPager from "../../components/ProjectPager.astro";
+
+// Metadata for Home grid discovery
+export const project = {
+  slug: "placeholder-2",
+  title: "Placeholder",
+  skills: ["UI Design", "Motion Design", "Responsive Design", "3D Design"],
+  thumbnail: "https://picsum.photos/seed/placeholder-2-thumb/1244/855",
+  order: 4,
+  showInHome: false,
+};
+---
+
+<Base title={project.title}>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, noimageindex, nosnippet" />
+    <meta name="googlebot" content="noindex, noimageindex, nosnippet" />
+  </Fragment>
+  <main>
+    <section class={s.stack40}>
+      <header class={s.stack10}>
+        <h1 class="label">{project.title}</h1>
+        <p class="body muted">{project.skills.join(", ")}</p>
+      </header>
+
+      <div class={s.stack24}>
+        <img
+          src="https://picsum.photos/seed/placeholder-2-hero/1000/271"
+          alt={`${project.title} hero`}
+          width="1000"
+          height="271"
+          class={s.imageHero}
+        />
+      </div>
+    </section>
+
+    <section class={`${s.pad40} ${s.stack40}`}>
+      <div class={s.rowWrap}>
+        <div class={s.col}>
+          <h2 class="muted label">Introduction</h2>
+          <p class="body">
+            The goal was to position the brand as a forward-thinking AI company while ensuring
+            usability and adoption. We focused on a conversational experience, using motion and 3D
+            to reinforce the identity while keeping structure and clarity at the forefront.
+          </p>
+        </div>
+        <div class={s.col}></div>
+      </div>
+
+      <div class={s.rowWrap}>
+        <div class={s.col}>
+          <h2 class="label">Responsibilities</h2>
+          <p class="body">
+            UI Design<br />Interaction Design<br />Responsive Design<br />3D Design
+          </p>
+        </div>
+        <div class={s.col}>
+          <h2 class="label">Stack</h2>
+          <p class="body">
+            Figma<br />Framer Motion<br />HTML & CSS<br />Spline
+          </p>
+        </div>
+        <div class={s.col}>
+          <h2 class="label">Partners</h2>
+          <p class="body">
+            Juan Carlos Alonso<br />Design Lead<br /><br />Juan Perea<br />
+            Front-end Developer
+          </p>
+        </div>
+        <div class={s.col}>
+          <h2 class="label">Client</h2>
+          <p class="body">Diverger</p>
+        </div>
+      </div>
+    </section>
+
+    <section class={`${s.padB40} ${s.stack24}`}>
+      <img
+        src="https://picsum.photos/seed/placeholder-2-cover/1847/1039"
+        alt="Video Cover"
+        width="1847"
+        height="1039"
+        class={s.imageCover}
+      />
+    </section>
+
+    <section class={`${s.pad40} ${s.rowWrap}`}>
+      <div class={s.colWide}>
+        <h2 class="muted label">Plan</h2>
+        <p class="body">
+          We designed an AI-first interface with a prompt system to guide users and encourage
+          exploration. Motion and 3D elements provide feedback and personality while CSS polish
+          ensures performance and responsiveness across devices.
+        </p>
+      </div>
+      <div class={s.colMedia}>
+        <img
+          src="https://picsum.photos/seed/placeholder-2-media1/1244/885"
+          alt="Media"
+          width="1244"
+          height="885"
+          class={s.imgResponsive}
+        />
+      </div>
+    </section>
+
+    <section class={`${s.pad40} ${s.stack24}`}>
+      <div class={s.fullWidthMedia}></div>
+    </section>
+
+    <section class={`${s.pad40} ${s.grid2}`}>
+      <div class={s.stack24}>
+        <img
+          src="https://picsum.photos/seed/placeholder-2-grid1/800/600"
+          alt="Media A"
+          class={s.imgResponsive}
+        />
+        <div class={s.grid4}>
+          <div class={s.square}></div>
+          <div class={s.square}></div>
+          <div class={s.square}></div>
+          <div class={s.square}></div>
+        </div>
+      </div>
+      <div class={s.stack24}>
+        <div class={s.media16x9}></div>
+        <div class={s.row10}>
+          <div class={`${s.square} ${s.flex1}`}></div>
+          <div class={`${s.square} ${s.flex1}`}></div>
+        </div>
+      </div>
+    </section>
+    <ProjectPager currentSlug={project.slug} />
+  </main>
+</Base>

@@ -1,0 +1,134 @@
+---
+import Base from "../../layouts/Base.astro";
+import ProjectPager from "../../components/ProjectPager.astro";
+import s from "../../styles/project.module.scss";
+import { Image } from "astro:assets";
+import poster from "../../images/yep-poster.webp";
+import thumb from "../../videos/yep-video.webm";
+import intro from "../../images/yep-intro.webp";
+import screens from "../../videos/yep-screens.webm";
+import tokens from "../../images/yep-design-tokens.webp";
+import designSys from "../../images/yep-design-system.webp";
+import cards from "../../videos/yep-cards.webm";
+import web from "../../videos/yep-web.webm";
+
+// Metadata for Home grid discovery
+export const project = {
+  slug: "yepcode",
+  title: "YepCode",
+  skills: ["Design System", "UI Design", "UX Design", "Web Design"],
+  thumbnail: poster,
+  order: 2,
+  showInHome: true,
+  poster,
+  video: thumb,
+};
+---
+
+<Base title={project.title}>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, noimageindex, nosnippet" />
+    <meta name="googlebot" content="noindex, noimageindex, nosnippet" />
+  </Fragment>
+  <main>
+    <section class={`${s.grid} ${s.first}`}>
+      <header class={`${s.col} ${s.header}`}>
+        <h1 class="label">{project.title}</h1>
+        <p class="body muted">Integration and Automation Platform</p>
+      </header>
+      <div class={`${s.col} ${s.intro}`}>
+        <h2 class="muted label">introduction</h2>
+        <p class="body">
+          YepCode is an automation and integration platform that helps companies connect APIs, run
+          workflows, and streamline operations through code. Originally an internal tool, it evolved
+          into an independent startup as its adoption grew. My focus was to improve UX, build a
+          scalable design system, and ensure consistency across both product and website.
+        </p>
+      </div>
+      <div class={`${s.col} ${s.right} ${s.smallGrid}`}>
+        <div class={s.col2}>
+          <h2 class="muted label">Responsibilities</h2>
+          <p class="body" set:html={project.skills.join("<br/>")} />
+        </div>
+
+        <div class={s.col}>
+          <h2 class="muted label">Stack</h2>
+          <p class="body">
+            Figma<br />Webflow<br />HTML & CSS
+          </p>
+        </div>
+        <div class={s.col}>
+          <h2 class="muted label">Partners</h2>
+          <p class="body">
+            Juan Carlos Alonso<br /><span class="muted">Design Lead</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class={s.full}>
+      <Image src={intro} alt="Screenshot of YepCode" loading="eager" />
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.col}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Plan</h2>
+          <p class="body">
+            The aim was to simplify workflows for technical users while preparing the product for
+            growth. This meant reducing friction in core tasks, unifying the interface with a design
+            system, and creating a corporate website that reflected the platform’s technical depth
+            and identity.
+          </p>
+        </div>
+      </div>
+      <div class={s.center}>
+        <video src={screens} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.right}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Process</h2>
+          <p class="body">
+            We started with a UX audit of key flows. From there, I defined tokens, components, and
+            patterns in Figma to ensure scalability. In parallel, with my team, I helped built
+            YepCode’s website in Webflow, aligning it visually with the app.
+          </p>
+        </div>
+      </div>
+      <div class={s.center}>
+        <Image src={tokens} alt="YepCode Design Tokens" loading="lazy" />
+        <Image src={designSys} alt="Components of the YepCode Design System" loading="lazy" />
+        <video src={cards} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+        <video src={web} autoplay muted loop playsinline preload="auto">
+          Your browser does not support the video element.
+        </video>
+      </div>
+    </section>
+
+    <section class={s.grid}>
+      <div class={s.col}>
+        <div class={s.sticky}>
+          <h2 class="muted label">Impact</h2>
+          <p class="body">
+            The design system reduced inconsistencies and lowered QA feedback, while improved flows
+            gave users clearer paths to create and run automations. The website provided a
+            professional showcase that supported YepCode’s transition from internal tool to startup,
+            strengthening both usability and brand presence.
+          </p>
+        </div>
+      </div>
+      <div class={s.rightFull}>
+        <Image src={poster} alt="YepCode Across Devices" loading="lazy" />
+      </div>
+    </section>
+
+    <ProjectPager currentSlug={project.slug} />
+  </main>
+</Base>

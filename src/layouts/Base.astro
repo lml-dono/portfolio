@@ -1,0 +1,43 @@
+---
+export interface Props {
+  title?: string;
+}
+import "../styles/global.scss";
+import Navbar from "../components/Navbar.astro";
+import ProgressiveBlurTop from "../components/ProgressiveBlurTop.astro";
+import Footer from "../components/Footer.astro";
+const siteTitle = "Pablo Lamela - Portfolio";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Pablo Lamela - Portfolio</title>
+
+    <!-- Inter font (Display via variable font) -->
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <meta
+      name="description"
+      content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
+    />
+    <meta property="og:title" content="Pablo Lamela" />
+    <meta
+      property="og:description"
+      content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:type" content="website" />
+    <slot name="head" />
+  </head>
+  <body>
+    <Navbar currentPath={Astro.url.pathname} />
+    <ProgressiveBlurTop />
+    <slot />
+    <Footer />
+    <script type="module" src="/src/scripts/lenis.ts"></script>
+  </body>
+</html>

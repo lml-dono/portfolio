@@ -1,0 +1,113 @@
+@import "../styles/_builders";
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 160px; /* default */
+  pointer-events: none;
+  border-radius: 12px;
+  z-index: 90;
+}
+
+@include for-screens-below("s") {
+  .container {
+    height: 96px; /* requested for < m */
+  }
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  transform: rotate(180deg);
+}
+
+/* Base layer styles */
+.layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+/* Layer specifics (match original inline styles) */
+.l1 {
+  z-index: 1;
+  backdrop-filter: blur(0.5px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 0%,
+    rgb(0, 0, 0) 12.5%,
+    rgb(0, 0, 0) 25%,
+    rgba(0, 0, 0, 0) 37.5%
+  );
+}
+
+.l2 {
+  z-index: 2;
+  backdrop-filter: blur(0.5625px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 12.5%,
+    rgb(0, 0, 0) 25%,
+    rgb(0, 0, 0) 37.5%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
+.l3 {
+  z-index: 3;
+  backdrop-filter: blur(1.125px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 25%,
+    rgb(0, 0, 0) 37.5%,
+    rgb(0, 0, 0) 50%,
+    rgba(0, 0, 0, 0) 62.5%
+  );
+}
+
+.l4 {
+  z-index: 4;
+  backdrop-filter: blur(2.25px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 37.5%,
+    rgb(0, 0, 0) 50%,
+    rgb(0, 0, 0) 62.5%,
+    rgba(0, 0, 0, 0) 75%
+  );
+}
+
+.l5 {
+  z-index: 5;
+  backdrop-filter: blur(4.5px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 50%,
+    rgb(0, 0, 0) 62.5%,
+    rgb(0, 0, 0) 75%,
+    rgba(0, 0, 0, 0) 87.5%
+  );
+}
+
+.l6 {
+  z-index: 6;
+  backdrop-filter: blur(9px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0) 62.5%,
+    rgb(0, 0, 0) 75%,
+    rgb(0, 0, 0) 87.5%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.l7 {
+  z-index: 7;
+  backdrop-filter: blur(18px);
+  mask-image: linear-gradient(rgba(0, 0, 0, 0) 75%, rgb(0, 0, 0) 87.5%, rgb(0, 0, 0) 100%);
+}
+
+.l8 {
+  z-index: 8;
+  backdrop-filter: blur(36px);
+  mask-image: linear-gradient(rgba(0, 0, 0, 0) 87.5%, rgb(0, 0, 0) 100%);
+}

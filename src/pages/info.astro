@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import Button from "../components/Button.astro";
+import s from "../styles/info.module.scss";
+import { Image } from "astro:assets";
+import portrait from "../images/portrait.webp";
+---
+
+<Base title="Info">
+  <main class={s.main}>
+    <div class={s.name}>
+      <h1 class="label">I am Pablo Lamela,</h1>
+      <h2 class="muted label">UX/UI Product Designer</h2>
+    </div>
+    <section class={s.grid}>
+      <div class={s.intro}>
+        <p>
+          I design digital products by turning complexity into clarity — translating ideas into
+          thoughtful, intuitive interfaces. I focus on delivering clear structure and visual
+          consistency across every stage of the design process.
+        </p>
+        <p>
+          Throughout the product lifecycle, I collaborate closely with developers to ensure
+          consistent and scalable results. My attention to detail and focus on interface quality
+          help maintain cohesion and flexibility as products grow and evolve.
+        </p>
+      </div>
+      <div class={s.portrait}>
+        <Image src={portrait} alt="Portrait of Pablo Lamela" loading="eager" />
+      </div>
+      <div class={s.links}>
+        <Button href="mailto:pablo.lamela50@gmail.com" label="Email" />
+        <Button href="https://www.linkedin.com/in/pablo-lamela/" label="Linkedin" external={true} />
+        <Button href="/EN-pablo-lamela-cv.pdf" label="Download CV" external={true} />
+      </div>
+
+      <div class={s.experience}>
+        <h3 class="muted label">Experience</h3>
+        <p class="body">
+          Diverger<br />Trileuco Solutions<br />Visual Publinet<br />Grupo Inverdama<br />Sanzza
+        </p>
+      </div>
+      <div class={s.projects} data-nosnippet>
+        <h3 class="muted label">Projects</h3>
+        <p class="body" data-nosnippet>
+          Delta <span class="muted">Leading textile company</span><br />YepCode<br />Diverger
+          Website<br />iMBranded<br />Denodo<br />Political Intelligence
+        </p>
+      </div>
+      <div class={s.skills}>
+        <h3 class="muted label">Skills</h3>
+        <p class="body">
+          Agile UX<br />Scrum<br />User-Centered Design<br />Design Thinking<br />User Flow<br
+          />Wireframes<br />Mid Fidelity<br />High Fidelity<br />Prototype
+        </p>
+      </div>
+      <div class={s.industries}>
+        <h3 class="muted label">Industries</h3>
+        <p class="body">
+          Tech & SaaS<br />AI & Automation<br />Retail<br />Data<br />DevOps<br />Consultancy<br
+          />Augmented Reality
+        </p>
+      </div>
+      <div class={s.tools}>
+        <h3 class="muted label">Tools</h3>
+        <p class="body">
+          Figma<br />HTML/CSS<br />Webflow<br />Illustrator<br />Photoshop<br />Indesign<br
+          />Premiere Pro<br />After Effects<br />Rive<br />Spline<br />Jira
+        </p>
+      </div>
+    </section>
+  </main>
+</Base>

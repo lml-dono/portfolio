@@ -1,0 +1,157 @@
+@import "../styles/_builders";
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* layout_Z58JT0 spacing between title and grid */
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between; /* layout_HANCDF */
+}
+
+.title {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--color-primary);
+}
+
+.count {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--color-grey);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px; /* layout_FZKC5M */
+  width: 100%;
+}
+
+@include for-screens-below("l") {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative; /* para el cursor custom */
+  display: flex;
+  flex-direction: column; /* layout_YSIDIS */
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+
+  /* Variables CSS para posicionar el cursor custom */
+  --x: 0px;
+  --y: 0px;
+}
+
+.thumb {
+  position: relative; /* stack poster/video */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* layout_KM3L53 */
+  gap: 24px;
+  width: 100%;
+  aspect-ratio: 16/11; /* maintain shape similar to design */
+  border-radius: 0;
+}
+
+.thumbImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 200ms ease;
+}
+
+.thumbVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+
+.card[data-video-in] .thumbVideo {
+  opacity: 1;
+}
+
+.card[data-hover][data-painted] .thumbVideo {
+  opacity: 1;
+}
+
+.card[data-hover][data-painted] .thumbImg {
+  opacity: 0;
+}
+
+@media (pointer: coarse) {
+  .thumbVideo {
+    display: none;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column; /* layout_TCD36R */
+}
+
+.cardTitle {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--color-primary);
+}
+
+.skills {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  color: var(--color-grey);
+}
+
+/* Custom cursor inside each project card */
+@media (pointer: fine) {
+  /* Oculta el cursor nativo mientras está activo el cursor custom */
+  .card[data-hover] {
+    cursor: none;
+  }
+
+  /* Rectángulo flotante que sigue al puntero */
+  .card::after {
+    content: "View Project";
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 3;
+
+    /* Estilo según requisitos */
+    font-size: 16spx;
+    color: var(--color-primary); /* “black” en globals */
+    padding: 12px 16px;
+    background: var(--color-background-opacity); /* fondo con opacidad */
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+
+    display: block;
+    opacity: 0;
+    transition: opacity 120ms ease;
+    white-space: nowrap;
+    line-height: 1;
+    text-align: center;
+  }
+
+  /* Mostrar el cursor custom cuando está activo (data-hover) */
+  .card[data-hover]::after {
+    opacity: 1;
+  }
+}

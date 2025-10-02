@@ -1,0 +1,28 @@
+.footer {
+  display: flex;
+  justify-content: space-between; /* layout_UN9NY6 */
+  align-items: baseline;
+  gap: 32px;
+  padding: 120px 0px 16px;
+  width: 100%;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  margin: 0 auto;
+  color: var(--color-primary);
+}
+
+.brand,
+.copy {
+  font-size: 12px; /* style_494A4Z in Figma */
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.copy {
+  color: var(--color-grey);
+}

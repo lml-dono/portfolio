@@ -1,0 +1,62 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* matches layout_6JLRR7 */
+  gap: 32px;
+  width: 100%;
+  mix-blend-mode: difference;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+}
+
+.left,
+.right {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.center {
+  flex: 0 0 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.right {
+  text-align: right;
+  white-space: nowrap;
+  justify-content: flex-end; /* layout_6YT7X5 */
+}
+
+/* Brand text */
+.brand {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-primary);
+  text-decoration: none;
+  padding: 16px 0; /* layout_M55I9A */
+}
+
+.spacer {
+  flex: 0 0 1px;
+  height: 1px;
+  opacity: 0;
+}

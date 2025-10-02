@@ -1,0 +1,123 @@
+/* Shared layout utilities (no inline styles) */
+.sectionTop {
+  padding: var(--space-120) 0 0;
+}
+
+.pad40 {
+  padding: var(--space-40) 0;
+}
+
+.padB40 {
+  padding-bottom: var(--space-40);
+}
+
+.stack40 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+}
+
+.stack24 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.stack10 {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.rowWrap {
+  display: flex;
+  gap: var(--space-24);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+.colWide {
+  flex: 1 1 594px;
+  min-width: 280px;
+}
+
+.colMedia {
+  flex: 1 1 1244px;
+  min-width: 280px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+  align-items: start;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-10);
+}
+
+.square {
+  background: var(--color-background-opacity);
+  aspect-ratio: 1 / 1;
+}
+
+.media16x9 {
+  background: var(--color-background-opacity);
+  aspect-ratio: 16 / 9;
+}
+
+.imageHero {
+  width: min(100%, 1000px);
+  height: auto;
+  aspect-ratio: 1000 / 271;
+  object-fit: cover;
+}
+
+.imageCover {
+  width: min(100%, 1847px);
+  height: auto;
+  object-fit: cover;
+}
+
+.imgResponsive {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.fullWidthMedia {
+  width: 100%;
+  background: var(--color-background-opacity);
+  height: 320px;
+}
+
+/* New utilities to avoid inline styles */
+.rowBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.textRight {
+  text-align: right;
+}
+
+.row10 {
+  display: flex;
+  gap: var(--space-10);
+}
+
+.flex1 {
+  flex: 1 1 0%;
+}
+
+/* Mobile spacing handled via tokens in :root (tokens.css) */

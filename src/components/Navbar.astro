@@ -1,0 +1,31 @@
+---
+import Button from "./Button.astro";
+import styles from "./Navbar.module.scss";
+import { links } from "../config/site";
+
+export interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = "/" } = Astro.props;
+const isHome = currentPath === "/";
+
+const contactLabel = isHome ? "Contact" : "Close";
+const contactHref = isHome ? links.mailto : "/";
+---
+
+<nav class={styles.nav} aria-label="Primary">
+  <div class={styles.inner}>
+    <div class={styles.left}>
+      <Button href="/" label="Pablo Lamela" class={styles.brand} />
+    </div>
+
+    <div class={styles.center}>
+      <Button href="/info" label="Info" />
+    </div>
+
+    <div class={styles.right}>
+      <Button href={contactHref} label={contactLabel} />
+    </div>
+  </div>
+</nav>

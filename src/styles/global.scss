@@ -1,0 +1,192 @@
+@import "./_builders";
+/* Global SCSS loaded in Astro */
+
+/* Typography + Tokens */
+:root {
+  /* Colors */
+  --color-background: #080808;
+  --color-background-opacity: rgba(8, 8, 8, 0.4);
+  --color-primary: #f7f7f7;
+  --color-white: #fff;
+  --color-black: #000;
+  --color-grey: #979797;
+
+  /* Type scale (Inter Display) */
+  --font-body-size: 16px;
+  --font-body-line: 1.5; /* 150% */
+  --font-label-size: 16px;
+  --font-label-line: 1.2; /* 120% */
+
+  /* Default font: Inter Display (static, non-variable), weight 400 */
+  font-family:
+    "Inter",
+    Inter,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1; /* Chrome fix */
+  font-optical-sizing: auto;
+
+  /* Tokens moved from tokens.css */
+  --nav-h: 72px;
+
+  /* Overlay de blur progresivo bajo la navbar */
+  --blur-height: 160px;
+  --blur-max: 50px;
+
+  /* Z-index del overlay por debajo del navbar (navbar debe ser 100) */
+  --overlay-z: 90;
+
+  /* Spacing tokens (desktop) */
+  --space-120: 120px; /* main gap & padding-top base */
+  --space-40: 40px; /* pad40, stack40 */
+  --space-24: 24px; /* row, grid gaps */
+  --space-32: 32px; /* rowBetween */
+  --space-10: 10px; /* small gaps */
+  --space-body-x: 24px; /* body horizontal margin */
+}
+
+::-moz-selection,
+::selection {
+  color: var(--color-background);
+  background: #ffab6c;
+}
+
+/* Mobile tokens moved from tokens.css (override desktop values) */
+@include for-screens-below("s") {
+  :root {
+    /* Reduce overlay height by 50% on mobile */
+    --blur-height: 80px;
+
+    /* Spacing tokens (mobile = 50% de desktop) */
+    --space-120: 60px;
+    --space-40: 20px;
+    --space-24: 12px;
+    --space-32: 16px;
+    --space-10: 5px;
+    --space-body-x: 12px;
+  }
+}
+
+/* Use variable font if supported */
+@supports (font-variation-settings: normal) {
+  :root {
+    /* Keep static Inter Display even if variable fonts are supported */
+    font-family:
+      "Inter Display",
+      Inter,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+  }
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0 var(--space-body-x);
+}
+
+/* Base */
+body {
+  background: var(--color-background);
+  color: var(--color-primary);
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+  font-weight: 400;
+
+  /* Font antialiasing */
+  -webkit-font-smoothing: antialiased; /* macOS Safari/Chrome */
+  -moz-osx-font-smoothing: grayscale; /* macOS Firefox */
+  text-rendering: optimizeLegibility; /* enable kerning/ligatures where supported */
+}
+
+/* Text styles */
+.Label,
+.label {
+  font-size: var(--font-label-size);
+  line-height: var(--font-label-line);
+  font-weight: 400;
+}
+
+.body {
+  font-size: var(--font-body-size);
+  line-height: var(--font-body-line);
+}
+
+.muted {
+  color: var(--color-grey);
+}
+
+/* Global text weight: force 400 across common text elements */
+:where(body, p, a, h1, h2, h3, h4, h5, h6, li, label, span, small, strong, em) {
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Global radius reset */
+:where(
+  img,
+  video,
+  canvas,
+  iframe,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  div,
+  section,
+  article,
+  figure
+) {
+  border-radius: 0 !important;
+}
+
+/* Links */
+a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+/* Layout */
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-120); /* spacing between sections */
+  padding-top: var(--space-120); /* top spacing under navbar */
+}
+
+/* Lenis Smooth Scroll base */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto; /* evita doble suavizado nativo */
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain; /* útil para overlays/modales */
+}
+.lenis.lenis-stopped {
+  overflow: hidden; /* si pausan Lenis */
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none; /* opcional: evita capturas de iframes durante scroll */
+}
