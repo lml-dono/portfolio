@@ -1,0 +1,33 @@
+---
+import "../styles/global.scss";
+import s from "../styles/notfound.module.scss";
+import Spline404Viewer from "../components/Spline404.tsx";
+import Button from "../components/Button.astro";
+const pageTitle = "404 — Página no encontrada";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <main>
+      <section class={s.fourohfour} aria-label="404 Page">
+        <div class={s.digit} aria-hidden="true">4</div>
+        <div class={s.viewer}>
+          <Spline404Viewer client:load />
+        </div>
+        <div class={s.digit} aria-hidden="true">4</div>
+      </section>
+
+      <div class={s.message}>
+        <h2 class="label">This is not the page you are looking for</h2>
+        <Button href="/" label="Go back" />
+      </div>
+    </main>
+  </body>
+</html>

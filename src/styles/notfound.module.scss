@@ -1,0 +1,40 @@
+.fourohfour {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: var(--space-24);
+}
+
+.digit {
+  font-size: clamp(64px, 16vw, 240px);
+  line-height: 1;
+  color: var(--color-primary);
+  user-select: none;
+}
+
+.viewer {
+  height: clamp(40vh, 60vh, 70vh);
+  max-height: 75vh;
+  min-height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.message {
+  text-align: center;
+  h2 {
+    margin-bottom: var(--space-24);
+  }
+}
+
+@media (max-width: 640px) {
+  .fourohfour {
+    gap: clamp(6px, 3vw, 16px);
+  }
+  .viewer {
+    height: 45vh;
+  }
+  .digit {
+    font-size: clamp(56px, 20vw, 160px);
+  }
+}
