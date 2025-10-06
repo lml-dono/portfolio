@@ -1,6 +1,12 @@
 @import "../styles/_builders";
 
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 .main {
+  flex: 1;
   gap: var(--space-24);
 }
 
