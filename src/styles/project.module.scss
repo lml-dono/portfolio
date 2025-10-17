@@ -72,9 +72,6 @@ video {
   grid-template-columns: repeat(2, 1fr);
   grid-column-gap: var(--space-24);
   grid-row-gap: var(--space-40);
-  div:last-of-type {
-    align-self: end;
-  }
 }
 
 @include for-screens-above("s") {
