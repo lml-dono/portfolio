@@ -116,7 +116,7 @@
 }
 
 .skills {
-  font-size: var(--font-body-size);
+  font-size: 0.875rem;
   line-height: var(--font-body-line);
   color: var(--color-grey);
 }
@@ -139,7 +139,7 @@
     z-index: 3;
 
     /* Estilo según requisitos */
-    font-size: 16spx;
+    font-size: 1rem;
     color: var(--color-primary); /* “black” en globals */
     padding: 12px 16px;
     background: var(--color-background-opacity); /* fondo con opacidad */
