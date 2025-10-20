@@ -1,18 +1,9 @@
 ---
+import BootHover from "./BootHover.tsx";
 // src/components/VariableWeightHover.astro
-import setupVariableWeightHover from "../scripts/VariableFontEffect";
 ---
 
 <div class="hero fitline-container">
   <slot />
 </div>
-
-<script type="module" is:inline>
-  import setupVariableWeightHover from "/src/scripts/VariableFontEffect.ts";
-  // Ejecuta solo una vez por componente montado:
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupVariableWeightHover, { once: true });
-  } else {
-    setupVariableWeightHover();
-  }
-</script>
+<BootHover client:load />

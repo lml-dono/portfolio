@@ -6,6 +6,7 @@ import "../styles/global.scss";
 import Navbar from "../components/Navbar.astro";
 import ProgressiveBlurTop from "../components/ProgressiveBlurTop.astro";
 import Footer from "../components/Footer.astro";
+import BootClient from "../components/BootClient.tsx";
 const siteTitle = "Pablo Lamela - Portfolio";
 ---
 
@@ -32,36 +33,13 @@ const siteTitle = "Pablo Lamela - Portfolio";
     <meta property="og:image" content={`${import.meta.env.BASE_URL}og-image.webp`} />
     <meta property="og:type" content="website" />
     <slot name="head" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://rsms.me; font-src 'self' https://rsms.me data:; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; frame-src 'self'; worker-src 'self' blob:; base-uri 'self'; form-action 'self'">
   </head>
   <body>
     <Navbar currentPath={Astro.url.pathname} />
     <ProgressiveBlurTop />
     <slot />
     <Footer />
-    <script src="https://unpkg.com/lenis@latest/dist/lenis.min.js" defer></script>
-    <script>
-      addEventListener("load", () => {
-        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        const lenis = new window.Lenis({ duration: 1.2, smoothWheel: true });
-        function raf(t) {
-          lenis.raf(t);
-          requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-      });
-    </script>
-    <script type="module" is:inline>
-      import setupGravity from "/src/scripts/variable-weight-gravity.ts";
-      const initGravity = () => {
-        try {
-          setupGravity();
-        } catch {}
-      };
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initGravity, { once: true });
-      } else {
-        initGravity();
-      }
-    </script>
+    <BootClient client:load />
   </body>
 </html>
