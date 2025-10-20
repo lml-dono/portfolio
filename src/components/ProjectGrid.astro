@@ -88,6 +88,7 @@ const count = projects.length;
     // Solo activar en punteros finos (ratón)
     const finePointer = matchMedia("(pointer: fine)");
     if (finePointer.matches) {
+      const hoverState = new WeakMap();
       cards.forEach((card) => {
         const video = card.querySelector("[data-thumb-video]");
 
@@ -176,11 +177,24 @@ const count = projects.length;
         // Fase 1: hacer visible el vídeo, Fase 2: ocultar el poster y reproducir
         const startFadeIn = () => {
           if (!video) return;
+          // Epoch para invalidar callbacks pendientes si el puntero sale
+          const st = hoverState.get(card) || { epoch: 0 };
+          st.epoch = (st.epoch || 0) + 1;
+          hoverState.set(card, st);
+          const myEpoch = st.epoch;
+
           let done = false;
           const finish = () => {
             if (done) return;
+            // Si hubo un leave que invalidó este epoch, abortar
+            if ((hoverState.get(card)?.epoch || 0) !== myEpoch) return;
             done = true;
-            video.removeEventListener("transitionend", onOpaque);
+            if (st.onOpaque) {
+              video.removeEventListener("transitionend", st.onOpaque);
+              st.onOpaque = undefined;
+            }
+            st.t && clearTimeout(st.t);
+            st.t = undefined;
             // Fase 2: ocultar poster y empezar reproducción
             card.setAttribute("data-hover", "1");
             playSafe();
@@ -189,10 +203,11 @@ const count = projects.length;
             if (ev.target !== video || ev.propertyName !== "opacity") return;
             finish();
           };
+          st.onOpaque = onOpaque;
           // Escuchar el final de la transición de opacidad del vídeo
           video.addEventListener("transitionend", onOpaque);
           // Fallback por si la transición no dispara (estilo ya aplicado / navegador)
-          setTimeout(finish, 250);
+          st.t = setTimeout(finish, 250);
           // Fase 1: mostrar el vídeo (mantener poster visible mientras)
           card.setAttribute("data-video-in", "1");
         };
@@ -233,6 +248,21 @@ const count = projects.length;
         };
 
         const onLeave = () => {
+          // Invalida callbacks pendientes y limpia listeners/timeout
+          const st = hoverState.get(card);
+          if (st) {
+            st.epoch = (st.epoch || 0) + 1;
+            if (st.onOpaque) {
+              video && video.removeEventListener("transitionend", st.onOpaque);
+              st.onOpaque = undefined;
+            }
+            if (st.t) {
+              clearTimeout(st.t);
+              st.t = undefined;
+            }
+            hoverState.set(card, st);
+          }
+
           card.removeAttribute("data-hover");
           card.removeAttribute("data-video-in");
           if (video && typeof video.pause === "function") {
@@ -250,6 +280,9 @@ const count = projects.length;
         card.addEventListener("mouseenter", onEnter);
         card.addEventListener("mousemove", onMove);
         card.addEventListener("mouseleave", onLeave);
+        // Refuerzo: también cancelar hover en pointerleave/cancel
+        card.addEventListener("pointerleave", onLeave);
+        card.addEventListener("pointercancel", onLeave);
         // Accesibilidad: soporte foco/blur con teclado en desktop
         card.addEventListener("focus", onEnter);
         card.addEventListener("blur", onLeave);
