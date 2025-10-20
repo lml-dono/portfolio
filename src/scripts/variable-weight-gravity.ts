@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import SplitType from "split-type";
 
 /**
  * Mobile gravity-based variable weight controller.
@@ -42,30 +43,26 @@ export default function setupGravity() {
 function activate() {
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Gather chars (do NOT split if already split)
+  // Gather roots and ensure we have .char on mobile.
   const roots = Array.from(document.querySelectorAll<HTMLElement>('[data-animate="font-weight"]'));
-  const chars = roots.flatMap((root) => Array.from(root.querySelectorAll<HTMLElement>(".char")));
+  let chars = roots.flatMap((root) => Array.from(root.querySelectorAll<HTMLElement>(".char")));
 
-  // If no chars present, do nothing (we don't split to avoid conflict with desktop hover)
+  // If not split yet, split safely just on mobile (desktop hover script runs >=992px)
   if (chars.length === 0) {
-    // Still bind a lightweight listener to retry if layout scripts add .char later
-    const retry = () => {
-      const anyNow = document.querySelector('[data-animate="font-weight"] .char');
-      if (anyNow) {
-        // Re-activate fully
-        cleanup();
+    roots.forEach((root) => {
+      // Guard: only split if still no .char inside this root
+      if (!root.querySelector(".char")) {
+        try {
+          new SplitType(root, { types: "chars" });
+        } catch {}
       }
-    };
-    window.addEventListener("fitline:updated", retry);
-    window.addEventListener("resize", retry);
-    window.addEventListener("scroll", retry, { passive: true });
-    const cleanupRetry = () => {
-      window.removeEventListener("fitline:updated", retry);
-      window.removeEventListener("resize", retry);
-      window.removeEventListener("scroll", retry);
-    };
-    const cleanup = () => cleanupRetry();
-    return cleanup;
+    });
+    // Recollect after splitting
+    chars = roots.flatMap((root) => Array.from(root.querySelectorAll<HTMLElement>(".char")));
+    // If still none, abort quietly
+    if (chars.length === 0) {
+      return () => {};
+    }
   }
 
   // Quick controllers for CSS var --w
@@ -192,12 +189,15 @@ function activate() {
     isiOS;
 
   const attachOrientation = () => {
+    // Listen to both events (some browsers only fire one of them)
     window.addEventListener("deviceorientation", handleOrientation, true);
+    window.addEventListener("deviceorientationabsolute" as any, handleOrientation as any, true);
     document.addEventListener("visibilitychange", onVisibility);
   };
 
   const detachOrientation = () => {
     window.removeEventListener("deviceorientation", handleOrientation, true);
+    window.removeEventListener("deviceorientationabsolute" as any, handleOrientation as any, true);
     document.removeEventListener("visibilitychange", onVisibility);
   };
 

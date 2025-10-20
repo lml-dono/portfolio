@@ -176,15 +176,23 @@ const count = projects.length;
         // Fase 1: hacer visible el vídeo, Fase 2: ocultar el poster y reproducir
         const startFadeIn = () => {
           if (!video) return;
-          const onOpaque = (ev) => {
-            if (ev.target !== video || ev.propertyName !== "opacity") return;
+          let done = false;
+          const finish = () => {
+            if (done) return;
+            done = true;
             video.removeEventListener("transitionend", onOpaque);
             // Fase 2: ocultar poster y empezar reproducción
             card.setAttribute("data-hover", "1");
             playSafe();
           };
+          const onOpaque = (ev) => {
+            if (ev.target !== video || ev.propertyName !== "opacity") return;
+            finish();
+          };
           // Escuchar el final de la transición de opacidad del vídeo
           video.addEventListener("transitionend", onOpaque);
+          // Fallback por si la transición no dispara (estilo ya aplicado / navegador)
+          setTimeout(finish, 250);
           // Fase 1: mostrar el vídeo (mantener poster visible mientras)
           card.setAttribute("data-video-in", "1");
         };

@@ -91,7 +91,15 @@
 .card[data-video-in] .thumbVideo {
   opacity: 1;
 }
+/* Keep poster visible during phase 1; fade it only in phase 2 */
+.card[data-video-in] .thumbImg {
+  opacity: 1;
+}
 
+/* Safety: ensure video is visible on hover even if painted flag delays */
+.card[data-hover] .thumbVideo {
+  opacity: 1;
+}
 .card[data-hover][data-painted] .thumbVideo {
   opacity: 1;
 }
