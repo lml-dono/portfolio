@@ -19,14 +19,15 @@
 
   /* Default font: Inter Display (static, non-variable), weight 400 */
   font-family:
-    "Inter",
-    Inter,
+    "Inter var",
     system-ui,
     -apple-system,
+    "Segoe UI",
+    Roboto,
     sans-serif;
   font-feature-settings:
     "liga" 1,
-    "calt" 1; /* Chrome fix */
+    "calt" 1; /* ok mantenerlo */
   font-optical-sizing: auto;
 
   /* Tokens moved from tokens.css */
@@ -47,6 +48,9 @@
   --space-32: 32px; /* rowBetween */
   --space-10: 10px; /* small gaps */
   --space-body-x: 24px; /* body horizontal margin */
+
+  /* Spacing for hero section */
+  --hero-section: 50vh;
 }
 
 ::-moz-selection,
@@ -55,6 +59,11 @@
   background: #ffab6c;
 }
 
+@include for-screens-below("s") {
+  :root {
+    --hero-section: 30vh;
+  }
+}
 /* Mobile tokens moved from tokens.css (override desktop values) */
 @include for-screens-below("s") {
   :root {
@@ -77,13 +86,11 @@
   :root {
     /* Keep static Inter Display even if variable fonts are supported */
     font-family:
-      "Inter Display",
-      Inter,
+      "Inter var",
       system-ui,
       -apple-system,
-      "Segoe UI",
-      Roboto,
       sans-serif;
+    font-optical-sizing: auto;
   }
 }
 
@@ -119,6 +126,43 @@ body {
   text-rendering: optimizeLegibility; /* enable kerning/ligatures where supported */
 }
 
+/* Hero section Text styles */
+section.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: var(--hero-section);
+  h1 {
+    line-height: 100%;
+    font-size: clamp(1rem, 5cqw, 6rem);
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    [data-animate="font-weight"] .char {
+      display: inline-block;
+      will-change: font-weight;
+    }
+  }
+  h2 {
+    font-size: 0.75rem;
+    line-height: 100%;
+    color: var(--color-grey);
+    margin: 0;
+    width: 100%;
+    max-width: 1200px;
+    display: flex !important;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Gravity on mobile animates --w; map it to Inter variable axis */
+  [data-animate="font-weight"] .char {
+    font-variation-settings: "wght" var(--w, 400);
+    will-change: font-variation-settings;
+  }
+}
 /* Text styles */
 .Label,
 .label {

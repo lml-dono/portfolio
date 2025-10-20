@@ -2,11 +2,23 @@
 import Base from "../layouts/Base.astro";
 import SplineHeroReact from "../components/SplineHeroReact.tsx";
 import ProjectGrid from "../components/ProjectGrid.astro";
+import VariableWeightHover from "../components/VariableWeightHover.astro";
 ---
 
 <Base title="Astro">
   <main>
-    <SplineHeroReact client:load />
+    <section class="hero">
+      <VariableWeightHover>
+        <h1 class="fitline h1-fluid" data-animate="font-weight">Maxed out in detail — minimal in form</h1>
+      </VariableWeightHover>
+      <h2>
+        <span>UX</span>
+        <span>UI</span>
+        <span>PRODUCT</span>
+        <span>DESIGNER</span>
+      </h2>
+    </section>
+    <!--<SplineHeroReact client:load />-->
     <ProjectGrid />
   </main>
 </Base>

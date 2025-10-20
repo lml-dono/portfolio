@@ -18,8 +18,8 @@ const siteTitle = "Pablo Lamela - Portfolio";
     <title>Pablo Lamela - Portfolio</title>
 
     <!-- Inter font (Display via variable font) -->
-    <link rel="preconnect" href="https://rsms.me/" />
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="preconnect" href="https://rsms.me" crossorigin>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <meta
       name="description"
       content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
@@ -49,6 +49,19 @@ const siteTitle = "Pablo Lamela - Portfolio";
         }
         requestAnimationFrame(raf);
       });
+    </script>
+    <script type="module" is:inline>
+      import setupGravity from "/src/scripts/variable-weight-gravity.ts";
+      const initGravity = () => {
+        try {
+          setupGravity();
+        } catch {}
+      };
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initGravity, { once: true });
+      } else {
+        initGravity();
+      }
     </script>
   </body>
 </html>
