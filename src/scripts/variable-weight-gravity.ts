@@ -229,7 +229,7 @@ function activate() {
 
   const createPermissionButton = () => {
     const btn = document.createElement("button");
-    btn.textContent = "Enable. Motion";
+    btn.textContent = "Enable Motion";
     btn.style.position = "fixed";
     (btn.style as any).inset = "auto 12px 12px auto";
     btn.style.zIndex = "9999";
