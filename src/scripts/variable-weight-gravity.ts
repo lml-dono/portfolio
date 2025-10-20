@@ -88,6 +88,7 @@ function activate() {
   const gTarget = { x: 0, y: 1 };
   const gSmooth = { x: 0, y: 1 };
   const alpha = 0.15;
+  const SENSITIVITY = 2;
 
   // Weight range (reduced for PRM)
   const W_MIN = prefersReduced ? 300 : 100;
@@ -122,7 +123,7 @@ function activate() {
       // Signed projection along gravity
       const proj = dx * gx + dy * gy;
       // Normalize to [-1, 1]
-      let t = proj / R;
+      let t = (proj / R) * SENSITIVITY;
       if (t > 1) t = 1;
       else if (t < -1) t = -1;
       // Map to [W_MIN, W_MAX]
@@ -228,7 +229,7 @@ function activate() {
 
   const createPermissionButton = () => {
     const btn = document.createElement("button");
-    btn.textContent = "Activar inclinación";
+    btn.textContent = "Enable. Motion";
     btn.style.position = "fixed";
     (btn.style as any).inset = "auto 12px 12px auto";
     btn.style.zIndex = "9999";
