@@ -72,6 +72,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 1; /* ensure image fully visible by default */
   transition: opacity 200ms ease;
 }
 
@@ -81,11 +82,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.5;
+  opacity: 0; /* hidden by default to avoid overlay with image */
   transition: opacity 200ms ease;
   pointer-events: none;
 }
 
+/* Phase 1 on hover: show the video (poster still visible until phase 2) */
 .card[data-video-in] .thumbVideo {
   opacity: 1;
 }
