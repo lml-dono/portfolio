@@ -140,7 +140,6 @@ section.hero {
     max-width: 1200px;
   }
   h1 {
-    line-height: 100%;
     font-size: clamp(1rem, 5cqw, 4.5rem);
     line-height: 1;
     white-space: nowrap;
@@ -166,11 +165,27 @@ section.hero {
   }
 }
 
-@media (max-width: 991px) {
+@include for-screens-below("m") {
   /* Gravity on mobile animates --w; map it to Inter variable axis */
   [data-animate="font-weight"] .char {
     font-variation-settings: "wght" var(--w, 400);
     will-change: font-variation-settings;
+  }
+}
+
+@include for-screens-below("s") {
+  section.hero {
+    h1 {
+      font-size: clamp(1rem, 10cqw, 4.5rem);
+      white-space: nowrap;
+      flex-direction: column;
+      justify-content: spae-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      span:nth-of-type(2) {
+        display: none !important;
+      }
+    }
   }
 }
 /* Text styles */
