@@ -88,7 +88,7 @@ function activate() {
   const gTarget = { x: 0, y: 1 };
   const gSmooth = { x: 0, y: 1 };
   const alpha = 0.15;
-  const SENSITIVITY = 4;
+  const SENSITIVITY = 3;
 
   // Weight range (reduced for PRM)
   const W_MIN = prefersReduced ? 300 : 100;
