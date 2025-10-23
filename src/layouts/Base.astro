@@ -25,13 +25,32 @@ const siteTitle = "Pablo Lamela - Portfolio";
       name="description"
       content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
     />
+    <!-- Open Graph -->
     <meta property="og:title" content="Pablo Lamela" />
     <meta
       property="og:description"
       content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
     />
+    <!-- Primary OG image: animated GIF -->
+    <meta property="og:image" content={`${import.meta.env.BASE_URL}og-image.gif`} />
+    <meta property="og:image:type" content="image/gif" />
+    <!-- Fallback OG image: static WEBP -->
     <meta property="og:image" content={`${import.meta.env.BASE_URL}og-image.webp`} />
+    <meta property="og:image:type" content="image/webp" />
     <meta property="og:type" content="website" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pablo Lamela" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Pablo Lamela, UX/UI Product Designer. Digital products, clear interfaces, and visual systems that turn ideas into meaningful impact."
+    />
+    <meta name="twitter:image" content={`${import.meta.env.BASE_URL}og-image.gif`} />
+    <meta name="twitter:image:type" content="image/gif" />
+    <!-- Optional alt text for accessibility -->
+    <meta name="twitter:image:alt" content="Pablo Lamela - Portfolio Open Graph image" />
+
     <slot name="head" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://rsms.me; font-src 'self' https://rsms.me data:; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' blob:; frame-src 'self'; worker-src 'self' blob:; base-uri 'self'; form-action 'self'">
   </head>
