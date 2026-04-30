@@ -1,39 +1,88 @@
-@use './_builders' as *;
-@use '@fontsource-variable/geist/index.css' as geist;
-@use '@fontsource/geist-mono/index.css' as geist-mono;
+@use "./_builders" as *;
+@use "@fontsource-variable/geist/index.css" as geist;
+@use "@fontsource/geist-mono/index.css" as geist-mono;
 
-// ─── Tokens ───────────────────────────────────────────────────────────────────
+// ─── Color tokens (dark default) ──────────────────────────────────────────────
 
 :root {
-  // Colors
-  --color-bg:              #{use-color("bg-page-default")};
-  --color-bg-surface:      #{use-color("bg-surface-default")};
-  --color-bg-elevated:     #{use-color("bg-surface-elevated")};
-  --color-border:          #{use-color("border-default")};
-  --color-text:            #{use-color("text-primary-default")};
-  --color-text-secondary:  #{use-color("text-secondary-default")};
-  --color-text-tertiary:   #{use-color("text-tertiary-default")};
-  --color-amber:           #{use-color("base-amber")};
-  --color-amber-dim:       #{use-color("base-amber-dim")};
+  --color-bg: #101010;
+  --color-bg-surface: rgba(0, 0, 0, 0.4);
+  --color-btn-bg: #101010;
+  --color-btn-active: rgba(255, 255, 255, 0.12);
+  --color-text: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.9);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-accent: rgba(255, 171, 108, 0.9);
+  --color-border: rgba(255, 255, 255, 0.2);
+}
 
+// ─── Color tokens (light) ─────────────────────────────────────────────────────
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --color-bg: #f0f0f0;
+    --color-bg-surface: rgba(255, 255, 255, 0.4);
+    --color-btn-bg: #f0f0f0;
+    --color-btn-active: rgba(0, 0, 0, 0.12);
+    --color-text: #000000;
+    --color-text-secondary: rgba(0, 0, 0, 0.9);
+    --color-text-muted: rgba(0, 0, 0, 0.5);
+    --color-accent: rgba(186, 78, 19, 0.9);
+    --color-border: rgba(0, 0, 0, 0.2);
+  }
+}
+
+[data-theme="light"] {
+  --color-bg: #f0f0f0;
+  --color-bg-surface: rgba(255, 255, 255, 0.4);
+  --color-btn-bg: #f0f0f0;
+  --color-btn-active: rgba(0, 0, 0, 0.12);
+  --color-text: #000000;
+  --color-text-secondary: rgba(0, 0, 0, 0.9);
+  --color-text-muted: rgba(0, 0, 0, 0.5);
+  --color-accent: rgba(186, 78, 19, 0.9);
+  --color-border: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] {
+  --color-bg: #101010;
+  --color-bg-surface: rgba(0, 0, 0, 0.4);
+  --color-btn-bg: #101010;
+  --color-btn-active: rgba(255, 255, 255, 0.12);
+  --color-text: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.9);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-accent: rgba(255, 171, 108, 0.9);
+  --color-border: rgba(255, 255, 255, 0.2);
+}
+
+// ─── Layout & spacing tokens ──────────────────────────────────────────────────
+
+:root {
   // Typography
-  font-family: 'Geist Variable', system-ui, -apple-system, sans-serif;
-  font-feature-settings: 'liga' 1, 'calt' 1;
+  font-family:
+    "Geist Variable",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
   font-optical-sizing: auto;
 
   // Layout
-  --nav-h:         72px;
-  --blur-height:   160px;
-  --blur-max:      50px;
+  --nav-h: 64px;
+  --blur-height: 160px;
+  --blur-max: 50px;
 
   // Spacing (desktop)
-  --space-xs:      #{use-space("s1")};   // 8px
-  --space-s:       #{use-space("s3")};   // 16px
-  --space-m:       #{use-space("s5")};   // 24px
-  --space-l:       #{use-space("s7")};   // 40px
-  --space-xl:      #{use-space("s10")};  // 64px
-  --space-2xl:     7.5rem;               // 120px
-  --space-body-x:  #{use-space("s5")};   // 24px
+  --space-xs: #{use-space("s1")}; // 8px
+  --space-s: #{use-space("s3")}; // 16px
+  --space-m: #{use-space("s5")}; // 24px
+  --space-l: #{use-space("s7")}; // 40px
+  --space-xl: #{use-space("s10")}; // 64px
+  --space-2xl: 7.5rem; // 120px
+  --space-body-x: #{use-space("s5")}; // 24px
 
   --hero-h: 50vh;
 }
@@ -41,10 +90,10 @@
 // Mobile overrides
 @include for-screens-below("s") {
   :root {
-    --blur-height:  80px;
-    --space-2xl:    3.75rem; // 60px
+    --blur-height: 80px;
+    --space-2xl: 3.75rem; // 60px
     --space-body-x: #{use-space("s2")}; // 12px
-    --hero-h:       35vh;
+    --hero-h: 35vh;
   }
 }
 
@@ -53,7 +102,7 @@
 ::-moz-selection,
 ::selection {
   color: var(--color-bg);
-  background: var(--color-amber);
+  background: var(--color-accent);
 }
 
 // ─── Reset ────────────────────────────────────────────────────────────────────
@@ -62,6 +111,8 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
@@ -79,17 +130,42 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-transition,
+  html.theme-transition *,
+  html.theme-transition *::before,
+  html.theme-transition *::after {
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      outline-color 220ms ease,
+      text-decoration-color 220ms ease,
+      fill 220ms ease,
+      stroke 220ms ease,
+      box-shadow 220ms ease !important;
+  }
+}
+
 // ─── Global radius reset ──────────────────────────────────────────────────────
-// Los radios se aplican explícitamente por componente con @include radius()
 
 :where(
-  img, video, canvas, iframe, a, button,
-  input, textarea, select, div, section, article, figure
+  img,
+  video,
+  canvas,
+  iframe,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  div,
+  section,
+  article,
+  figure
 ) {
   border-radius: 0 !important;
 }

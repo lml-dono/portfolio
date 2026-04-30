@@ -1,19 +1,46 @@
 ---
-import styles from "./button.module.scss";
-
-interface Props {
+export interface Props {
   href?: string;
-  variant?: "default" | "ghost";
+  label?: string;
+  external?: boolean;
   class?: string;
 }
 
-const { href, variant = "default", class: className } = Astro.props;
-const Tag = href ? "a" : "button";
+const { href, label, external = false, class: extraClass = "" } = Astro.props;
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
 ---
 
-<Tag
-  class:list={[styles.button, styles[variant], className]}
-  href={href}
->
-  <slot />
-</Tag>
+{href ? (
+  <a href={href} class:list={["btn", extraClass]} rel={rel} target={target}>
+    <slot>{label}</slot>
+  </a>
+) : (
+  <button class:list={["btn", extraClass]}>
+    <slot>{label}</slot>
+  </button>
+)}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: color 120ms ease;
+  }
+
+  .btn:hover {
+    color: var(--color-accent);
+  }
+</style>

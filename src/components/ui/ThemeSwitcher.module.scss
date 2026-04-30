@@ -1,0 +1,31 @@
+@use "../../styles/_builders" as *;
+
+.switcher {
+  @include text-label-md;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: $radius-xs;
+  color: var(--color-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 120ms ease;
+
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+:global([data-theme-char]) {
+  display: inline-block;
+  will-change: transform, opacity;
+}

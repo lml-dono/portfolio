@@ -1,41 +1,75 @@
 @use 'sass:map';
 
-// Mobile-first breakpoints
-// s:768 m:1024 l:1200 xl:1440 2xl:1920
+//
+//////////////////////////////////////////
+//  Mediaqueries
+//////////////////////////////////////////
+//
+// -  Variables
+// -  Mixins
+
+// --------------------------------------
+//  Variables
+// --------------------------------------
+
 $breakpoints: (
-  "s":   768px,
-  "m":   1024px,
-  "l":   1200px,
-  "xl":  1440px,
-  "2xl": 1920px,
+  'xs':  1px,
+  's':   768px,
+  'm':   1024px,
+  'l':   1200px,
+  'xl':  1440px,
+  '2xl': 1920px,
 );
 
-@mixin for-screens-above($bp) {
-  @if map.has-key($breakpoints, $bp) {
-    @media (min-width: map.get($breakpoints, $bp)) {
-      @content;
+// --------------------------------------
+//  Mediaqueries mixins
+// --------------------------------------
+
+@mixin for-screen($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @if $breakpoint == 'xs' {
+      @media only screen and (max-width: (map.get($breakpoints, 's') - 1)) { @content; }
+    } @else if $breakpoint == 's' {
+      @media only screen and (min-width: map.get($breakpoints, 's')) and (max-width: (map.get($breakpoints, 'm') - 1)) { @content; }
+    } @else if $breakpoint == 'm' {
+      @media only screen and (min-width: map.get($breakpoints, 'm')) and (max-width: (map.get($breakpoints, 'l') - 1)) { @content; }
+    } @else if $breakpoint == 'l' {
+      @media only screen and (min-width: map.get($breakpoints, 'l')) and (max-width: (map.get($breakpoints, 'xl') - 1)) { @content; }
+    } @else if $breakpoint == 'xl' {
+      @media only screen and (min-width: map.get($breakpoints, 'xl')) { @content; }
+    } @else if $breakpoint == '2xl' {
+      @media only screen and (min-width: map.get($breakpoints, '2xl')) { @content; }
     }
   } @else {
-    @error '`#{$bp}` not found in $breakpoints.';
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
   }
 }
 
-@mixin for-screens-below($bp) {
-  @if map.has-key($breakpoints, $bp) {
-    @media (max-width: calc(#{map.get($breakpoints, $bp)} - 1px)) {
-      @content;
-    }
+@mixin for-screens-above($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) { @content; }
   } @else {
-    @error '`#{$bp}` not found in $breakpoints.';
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
+  }
+}
+
+@mixin for-screens-below($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (max-width: (map.get($breakpoints, $breakpoint) - 1)) { @content; }
+  } @else {
+    @error 'Invalid breakpoint: "#{$breakpoint}"';
   }
 }
 
 @mixin for-screens-between($lower, $upper) {
   @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
-    @media (min-width: map.get($breakpoints, $lower)) and (max-width: calc(#{map.get($breakpoints, $upper)} - 1px)) {
-      @content;
-    }
+    @media (min-width: map.get($breakpoints, $lower)) and (max-width: (map.get($breakpoints, $upper) - 1)) { @content; }
   } @else {
-    @error 'Breakpoint not found.';
+    @if not map.has-key($breakpoints, $lower) {
+      @error 'Your lower breakpoint was invalid: "#{$lower}"';
+    }
+    @if not map.has-key($breakpoints, $upper) {
+      @error 'Your upper breakpoint was invalid: "#{$upper}"';
+    }
   }
 }

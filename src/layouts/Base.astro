@@ -11,10 +11,7 @@ interface Props {
   description?: string;
 }
 
-const {
-  title = site.title,
-  description = site.description,
-} = Astro.props;
+const { title = site.title, description = site.description } = Astro.props;
 
 const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
 ---
@@ -40,6 +37,23 @@ const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/og-image.webp" />
 
+    <script is:inline>
+      (() => {
+        const storageKey = "theme";
+        const media = window.matchMedia("(prefers-color-scheme: light)");
+        const stored = localStorage.getItem(storageKey);
+        const mode =
+          stored === "light" || stored === "dark" || stored === "system"
+            ? stored
+            : "system";
+        const resolvedTheme =
+          mode === "system" ? (media.matches ? "light" : "dark") : mode;
+
+        document.documentElement.setAttribute("data-theme-mode", mode);
+        document.documentElement.setAttribute("data-theme", resolvedTheme);
+      })();
+    </script>
+
     <slot name="head" />
     <ViewTransitions />
   </head>
@@ -48,11 +62,11 @@ const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
     <ProgressiveBlurTop />
     <slot />
     <Footer />
-
-    <!-- Init Lenis + GSAP bridge — astro:page-load se dispara en cada navegación con View Transitions -->
     <script>
       import { initLenis } from "@/scripts/lenis.client";
-      import { initGsap } from "@/scripts/gsap.client";
+      import { gsap, initGsap } from "@/scripts/gsap.client";
+
+      window.__gsap = gsap;
 
       document.addEventListener("astro:page-load", () => {
         initLenis();
@@ -60,7 +74,6 @@ const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
       });
     </script>
 
-    <!-- Animaciones de font-weight variable -->
     <script>
       import "@/scripts/hover.client";
       import "@/scripts/gravity.client";

@@ -1,41 +1,31 @@
 // Espaciado — s0:4px … s10:64px
 $spaces: (
-  "s0":  0.25rem,
-  "s1":  0.5rem,
-  "s2":  0.75rem,
-  "s3":  1rem,
-  "s4":  1.25rem,
-  "s5":  1.5rem,
-  "s6":  2rem,
-  "s7":  2.5rem,
-  "s8":  3rem,
-  "s9":  3.5rem,
+  "s0": 0.25rem,
+  "s1": 0.5rem,
+  "s2": 0.75rem,
+  "s3": 1rem,
+  "s4": 1.25rem,
+  "s5": 1.5rem,
+  "s6": 2rem,
+  "s7": 2.5rem,
+  "s8": 3rem,
+  "s9": 3.5rem,
   "s10": 4rem,
-);
-
-// Paleta
-$colors: (
-  "bg-page-default":        #0a0a0a,
-  "bg-surface-default":     #111111,
-  "bg-surface-elevated":    #161616,
-  "border-default":         #1f1f1f,
-  "text-primary-default":   #ededed,
-  "text-secondary-default": #a0a0a0,
-  "text-tertiary-default":  #525252,
-  "base-amber":             #f59e0b,
-  "base-amber-dim":         #92400e,
 );
 
 // Z-index layers
 $layers: (
-  "back":    -1,
-  "base":     0,
-  "overlay":  90,
-  "navbar":   100,
+  "back": -1,
+  "base": 0,
+  "overlay": 90,
+  "navbar": 100,
 );
 
 // Radius tokens
-$radius-s:  12px;
-$radius-m:  16px;
-$radius-l:  20px;
-$radius-xl: 24px;
+$radius-xs: 0.5rem;
+$radius-sm: 0.75rem;
+$radius-md: 1rem;
+$radius-lg: 1.25rem;
+$radius-xl: 1.5rem;
+$radius-xxl: 2rem;
+$radius-xxxl: 2.75rem;

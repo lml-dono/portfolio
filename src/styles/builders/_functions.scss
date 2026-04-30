@@ -99,14 +99,6 @@
   }
 }
 
-@function use-color($key) {
-  @if map.has-key($colors, $key) {
-    @return map.get($colors, $key);
-  } @else {
-    @error '`#{$key}` not found in $colors. Valid keys: #{map-keys($colors)}';
-  }
-}
-
 @function use-layer($key) {
   @if map.has-key($layers, $key) {
     @return map.get($layers, $key);

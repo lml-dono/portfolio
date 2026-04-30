@@ -1,0 +1,19 @@
+---
+export interface Props {
+  href: string;
+  label: string;
+  active?: boolean;
+}
+
+import styles from "./NavLink.module.scss";
+
+const { href, label, active = false } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[styles.link, { [styles.active]: active }]}
+  data-active={active || undefined}
+>
+  {label}
+</a>
