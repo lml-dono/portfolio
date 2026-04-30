@@ -1,0 +1,12 @@
+---
+import styles from "./footer.module.scss";
+import { site, links } from "@/config/site";
+---
+
+<footer class={styles.footer}>
+  <div class={styles.inner}>
+    <span class={styles.brand}>{site.title}</span>
+    <a href={links.mailto} class={styles.email}>{site.contactEmail}</a>
+    <span class={styles.copy}>&copy; {new Date().getFullYear()}</span>
+  </div>
+</footer>

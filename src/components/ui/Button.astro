@@ -1,0 +1,19 @@
+---
+import styles from "./button.module.scss";
+
+interface Props {
+  href?: string;
+  variant?: "default" | "ghost";
+  class?: string;
+}
+
+const { href, variant = "default", class: className } = Astro.props;
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  class:list={[styles.button, styles[variant], className]}
+  href={href}
+>
+  <slot />
+</Tag>

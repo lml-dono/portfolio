@@ -1,0 +1,116 @@
+@use 'sass:map';
+@use 'variables' as *;
+
+// --------------------------------------
+//  Strings
+// --------------------------------------
+
+@function contain($list, $value) {
+  @return not not index($list, $value);
+}
+
+@function capitalize($string) {
+  @return to-upper-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+@function uncapitalize($string) {
+  @return to-lower-case(str-slice($string, 1, 1)) + str-slice($string, 2);
+}
+
+@function camelize($string) {
+  $progress: $string;
+  $result: "";
+  $exclude: " ", "-", "–", "—", "_", ",", ";", ":", ".";
+  @while str-length($progress) > 0 {
+    $char: str-slice($progress, 1, 1);
+    @if contain($exclude, $char) {
+      $progress: capitalize(str-slice($progress, 2, 2)) + str-slice($progress, 3);
+    } @else {
+      $result: $result + $char;
+      $progress: str-slice($progress, 2);
+    }
+  }
+  @return $result;
+}
+
+// --------------------------------------
+//  Maps
+// --------------------------------------
+
+@function str-explode($string, $delimiter: "") {
+  @if type-of($string) != "string" {
+    @error 'The argument $string: `#{$string}` is of incorrect type.';
+  } @else if type-of($delimiter) != "string" {
+    @error 'The argument $delimiter: `#{$delimiter}` is of incorrect type.';
+  }
+  $result: ();
+  $running: true;
+  @if str-length($delimiter) == 0 {
+    @for $i from 1 through str-length($string) {
+      $result: append($result, str-slice($string, $i, $i));
+    }
+    @return $result;
+  }
+  @while $running {
+    $index: str-index($string, $delimiter);
+    @if $index != null {
+      $item: str-slice($string, 1, ($index - 1));
+      $result: append($result, $item);
+      $string: str-slice($string, ($index + str-length($delimiter)));
+    } @else {
+      $running: false;
+    }
+  }
+  @return append($result, $string);
+}
+
+@function deep-map-check($map, $keys...) {
+  @if type-of($map) != "map" {
+    @error 'The argument $map: `#{$map}` is not a map.';
+  }
+  @each $key in $keys {
+    @if not map-has-key($map, $key) {
+      @return false;
+    }
+    $map: map-get($map, $key);
+  }
+  @return true;
+}
+
+@function deep-map-get($map, $keys...) {
+  @if type-of($map) != "map" {
+    @error 'The argument $map: `#{$map}` is not a map.';
+  }
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// --------------------------------------
+//  Uses — token helpers
+// --------------------------------------
+
+@function use-space($key) {
+  @if map.has-key($spaces, $key) {
+    @return map.get($spaces, $key);
+  } @else {
+    @error '`#{$key}` not found in $spaces. Valid keys: #{map-keys($spaces)}';
+  }
+}
+
+@function use-color($key) {
+  @if map.has-key($colors, $key) {
+    @return map.get($colors, $key);
+  } @else {
+    @error '`#{$key}` not found in $colors. Valid keys: #{map-keys($colors)}';
+  }
+}
+
+@function use-layer($key) {
+  @if map.has-key($layers, $key) {
+    @return map.get($layers, $key);
+  } @else {
+    @error '`#{$key}` not found in $layers. Valid keys: #{map-keys($layers)}';
+  }
+}

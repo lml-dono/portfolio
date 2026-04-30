@@ -1,0 +1,31 @@
+@use '../../styles/_builders' as *;
+
+.button {
+  @include text-label-md;
+  display: inline-flex;
+  align-items: center;
+  gap: use-space("s2");
+  padding: use-space("s2") use-space("s5");
+  @include radius($radius-m);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-text-secondary);
+    color: var(--color-text);
+  }
+}
+
+.ghost {
+  border-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
+
+  &:hover {
+    border-color: transparent;
+    color: var(--color-text);
+  }
+}

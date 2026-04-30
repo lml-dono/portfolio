@@ -1,0 +1,49 @@
+@use '../../styles/_builders' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: use-layer("navbar");
+  pointer-events: none;
+}
+
+.inner {
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-body-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.brand {
+  @include text-label-md;
+  color: var(--color-text);
+  opacity: 0.9;
+  letter-spacing: 0.08em;
+}
+
+.links {
+  display: flex;
+  gap: use-space("s5");
+  align-items: center;
+}
+
+.link {
+  @include text-label-md;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-text);
+  }
+}
+
+.active {
+  color: var(--color-amber);
+}

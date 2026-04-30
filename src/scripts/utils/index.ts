@@ -1,0 +1,1 @@
+export { splitChars } from "./splitChars";

@@ -1,0 +1,24 @@
+@use '../../styles/_builders' as *;
+
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--blur-height);
+  z-index: use-layer("overlay");
+  pointer-events: none;
+
+  // Gradiente de máscara: opaco arriba, transparente abajo
+  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+  backdrop-filter: blur(var(--blur-max));
+  -webkit-backdrop-filter: blur(var(--blur-max));
+
+  // Tint de fondo muy sutil
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-bg) 60%, transparent) 0%,
+    transparent 100%
+  );
+}

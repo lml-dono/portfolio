@@ -1,0 +1,41 @@
+@use 'sass:map';
+
+// Mobile-first breakpoints
+// s:768 m:1024 l:1200 xl:1440 2xl:1920
+$breakpoints: (
+  "s":   768px,
+  "m":   1024px,
+  "l":   1200px,
+  "xl":  1440px,
+  "2xl": 1920px,
+);
+
+@mixin for-screens-above($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @media (min-width: map.get($breakpoints, $bp)) {
+      @content;
+    }
+  } @else {
+    @error '`#{$bp}` not found in $breakpoints.';
+  }
+}
+
+@mixin for-screens-below($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @media (max-width: calc(#{map.get($breakpoints, $bp)} - 1px)) {
+      @content;
+    }
+  } @else {
+    @error '`#{$bp}` not found in $breakpoints.';
+  }
+}
+
+@mixin for-screens-between($lower, $upper) {
+  @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+    @media (min-width: map.get($breakpoints, $lower)) and (max-width: calc(#{map.get($breakpoints, $upper)} - 1px)) {
+      @content;
+    }
+  } @else {
+    @error 'Breakpoint not found.';
+  }
+}

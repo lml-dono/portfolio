@@ -1,0 +1,69 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import "../styles/global.scss";
+import Navbar from "@/components/layout/Navbar.astro";
+import ProgressiveBlurTop from "@/components/layout/ProgressiveBlurTop.astro";
+import Footer from "@/components/layout/Footer.astro";
+import { site } from "@/config/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+} = Astro.props;
+
+const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.webp" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.webp" />
+
+    <slot name="head" />
+    <ViewTransitions />
+  </head>
+  <body>
+    <Navbar currentPath={Astro.url.pathname} />
+    <ProgressiveBlurTop />
+    <slot />
+    <Footer />
+
+    <!-- Init Lenis + GSAP bridge — astro:page-load se dispara en cada navegación con View Transitions -->
+    <script>
+      import { initLenis } from "@/scripts/lenis.client";
+      import { initGsap } from "@/scripts/gsap.client";
+
+      document.addEventListener("astro:page-load", () => {
+        initLenis();
+        initGsap();
+      });
+    </script>
+
+    <!-- Animaciones de font-weight variable -->
+    <script>
+      import "@/scripts/hover.client";
+      import "@/scripts/gravity.client";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+@use 'variables' as *;
+@use 'mediaqueries' as *;
+
+// Layout — columnas responsive con carril central de 1200px
+@mixin content-grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] 1fr
+    [content-start] minmax(0, 1200px)
+    [content-end] 1fr
+    [full-end];
+}
+
+// Columna central del grid
+@mixin content-span {
+  grid-column: content;
+}
+
+// Radius consistente
+@mixin radius($r) {
+  border-radius: $r;
+}

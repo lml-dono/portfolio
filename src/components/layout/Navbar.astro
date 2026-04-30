@@ -1,0 +1,22 @@
+---
+import styles from "./navbar.module.scss";
+import { links } from "@/config/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isInfo = currentPath.startsWith("/info");
+---
+
+<nav class={styles.nav}>
+  <div class={styles.inner}>
+    <a href="/" class={styles.brand}>PL</a>
+    <div class={styles.links}>
+      <a href="/" class:list={[styles.link, !isInfo && styles.active]}>Work</a>
+      <a href="/info" class:list={[styles.link, isInfo && styles.active]}>Info</a>
+      <a href={links.mailto} class={styles.link}>Contact</a>
+    </div>
+  </div>
+</nav>
