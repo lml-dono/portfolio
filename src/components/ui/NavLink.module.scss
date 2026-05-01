@@ -1,24 +1,28 @@
-@use '../../styles/_builders' as *;
+@use "../../styles/_builders" as *;
 
 .link {
   @include text-label-md;
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
-  border-radius: $radius-xs !important;
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: color 120ms ease;
+  transition: color 150ms ease;
 
   &:hover {
     color: var(--color-accent);
   }
 }
 
-.active {
-  background: var(--color-btn-active);
+.link[data-active] {
   color: var(--color-text);
+
+  &:hover {
+    color: var(--color-text);
+  }
 }

@@ -2,7 +2,7 @@
 
 .wrapper {
   position: fixed;
-  bottom: 24px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
   z-index: use-layer("navbar");
@@ -11,6 +11,17 @@
   -webkit-backdrop-filter: blur(25px);
   border-radius: $radius-md !important;
   padding: 4px;
+}
+
+.pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  background: var(--color-btn-active);
+  border-radius: $radius-xs;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .nav {

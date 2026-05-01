@@ -7,7 +7,7 @@
   justify-content: center;
   padding: 8px 16px;
   border-radius: $radius-xs;
-  color: var(--color-text-secondary);
+  color: var(--color-text-muted);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -27,5 +27,4 @@
 
 :global([data-theme-char]) {
   display: inline-block;
-  will-change: transform, opacity;
 }

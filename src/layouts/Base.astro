@@ -72,6 +72,16 @@ const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
         initLenis();
         initGsap();
       });
+
+      // Preserve theme attributes across View Transitions.
+      // Astro replaces <html> attributes from the incoming page (which has none),
+      // causing a flash before the is:inline script re-applies them.
+      document.addEventListener("astro:before-swap", (e) => {
+        const theme = document.documentElement.getAttribute("data-theme");
+        const themeMode = document.documentElement.getAttribute("data-theme-mode");
+        if (theme) e.newDocument.documentElement.setAttribute("data-theme", theme);
+        if (themeMode) e.newDocument.documentElement.setAttribute("data-theme-mode", themeMode);
+      });
     </script>
 
     <script>

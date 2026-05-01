@@ -1,6 +1,6 @@
 ---
 import NavLink from "@/components/ui/NavLink.astro";
-import ThemeSwitcher from "@/components/ui/ThemeSwitcher.astro";
+import ThemeSwitch from "@/components/ui/ThemeSwitch";
 import styles from "./Navbar.module.scss";
 
 export interface Props {
@@ -17,8 +17,10 @@ const links = [
 ] as const;
 ---
 
-<div class={styles.wrapper} data-navbar-shell>
+<div class={styles.wrapper} data-navbar-shell transition:persist>
   <nav class={styles.nav} data-navbar-track>
+    <span class={styles.pill} data-navbar-pill aria-hidden="true"></span>
+
     {
       links.map(({ href, label }) => (
         <NavLink
@@ -29,6 +31,70 @@ const links = [
       ))
     }
 
-    <ThemeSwitcher />
+    <ThemeSwitch client:load />
   </nav>
 </div>
+
+<script>
+  import gsap from "gsap";
+
+  function positionPill(nav: HTMLElement, pill: HTMLElement, link: HTMLElement, animate: boolean) {
+    const navRect = nav.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const x = linkRect.left - navRect.left;
+    const y = linkRect.top - navRect.top;
+
+    if (animate) {
+      gsap.to(pill, { x, width: linkRect.width, duration: 0.4, ease: "expo.out" });
+    } else {
+      gsap.set(pill, { x, y, width: linkRect.width, height: linkRect.height, opacity: 1 });
+    }
+  }
+
+  function updateActiveLink(nav: HTMLElement) {
+    const path = window.location.pathname;
+    nav.querySelectorAll<HTMLElement>("a[data-nav-link]").forEach((link) => {
+      const href = link.getAttribute("href") ?? "";
+      const isActive = href === "/" ? path === "/" : path.startsWith(href);
+      if (isActive) {
+        link.dataset.active = "true";
+      } else {
+        delete link.dataset.active;
+      }
+    });
+  }
+
+  function initPill(nav: HTMLElement, pill: HTMLElement) {
+    updateActiveLink(nav);
+    const activeLink = nav.querySelector<HTMLElement>("a[data-active]");
+    if (activeLink) {
+      positionPill(nav, pill, activeLink, false);
+    } else {
+      gsap.set(pill, { opacity: 0 });
+    }
+  }
+
+  function init() {
+    const nav = document.querySelector<HTMLElement>("[data-navbar-track]");
+    const pill = document.querySelector<HTMLElement>("[data-navbar-pill]");
+    if (!nav || !pill) return;
+
+    if (!nav.dataset.pillBound) {
+      nav.dataset.pillBound = "true";
+      nav.addEventListener("click", (e) => {
+        const link = (e.target as HTMLElement).closest<HTMLElement>("a");
+        if (!link) return;
+        positionPill(nav, pill, link, true);
+      });
+    }
+
+    initPill(nav, pill);
+  }
+
+  document.addEventListener("astro:page-load", init);
+  if (document.readyState !== "loading") {
+    init();
+  } else {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  }
+</script>

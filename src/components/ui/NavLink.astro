@@ -12,7 +12,8 @@ const { href, label, active = false } = Astro.props;
 
 <a
   href={href}
-  class:list={[styles.link, { [styles.active]: active }]}
+  class={styles.link}
+  data-nav-link
   data-active={active || undefined}
 >
   {label}
